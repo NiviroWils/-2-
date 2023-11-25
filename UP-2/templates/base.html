@@ -10,7 +10,7 @@
     <header>
         <nav class="navbar-dark fixed" style="padding: 10px">
           <a href="/" style="font-size: 18px; font-weight: bold;">
-              {% block extra_title %}Дизайн-студия Design.pro{% endblock %}
+              {% block extra_title %}Design.pro{% endblock %}
           </a>
           {% if user.is_authenticated %}
           <a href="{% url 'logout' %}" style="font-size: 18px; font-weight: bold; float: right; margin-right: 20px">
@@ -21,7 +21,7 @@
                     Все заявки
                 </a>
                 <a href="{% url 'categories_list' %}" style="font-size: 18px; font-weight: bold; float: right; margin-right: 20px">
-                    Все категории
+                    Категории
                 </a>
             {% endif %}
            <a href="{% url 'create_application' %}" style="font-size: 18px; font-weight: bold; float: right; margin-right: 20px">

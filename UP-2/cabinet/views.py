@@ -7,7 +7,6 @@ from django.urls import reverse_lazy
 from .forms import *
 
 
-# домашняя
 class HomeView(TemplateView):
     def get(self, request, *args, **kwargs):
         applications = Application.objects.filter(status='В').order_by('-created')[:4]
@@ -15,7 +14,7 @@ class HomeView(TemplateView):
         context = {'applications': applications, 'applications_count': applications_count}
         return render(request, self.template_name, context)
 
-# регистрация
+
 class RegisterView(TemplateView):
     form_class = UserForm
     success_url = reverse_lazy('home')
@@ -26,7 +25,7 @@ class RegisterView(TemplateView):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
 
-        if form.is_valid(): # проверяем форму регистрации
+        if form.is_valid(): 
             user =form.save(commit=False)
             user.first_name = form.cleaned_data['first_name']
             username = form.cleaned_data['username']
@@ -42,7 +41,7 @@ class RegisterView(TemplateView):
 
         return render(request, self.template_name, locals())
 
-# логин
+
 class LoginView(TemplateView):
     success_url = reverse_lazy('home')
     def get(self, request, *args, **kwargs):
@@ -60,7 +59,7 @@ class LoginView(TemplateView):
         err = "Неправильное имя пользователя или пароль"
         return render(request, self.template_name, locals())
 
-# выход
+
 class LogoutView(TemplateView):
     success_url = reverse_lazy('home')
     def get(self, request, *args, **kwargs):
@@ -76,7 +75,7 @@ class ApplicationCreateView(TemplateView, LoginRequiredMixin):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
 
-        if form.is_valid():  # проверяем форму регистрации
+        if form.is_valid():  
             instance = form.save(commit=False)
             instance.applicant = request.user
             instance.save()
@@ -129,7 +128,7 @@ class ApplicationDoneChangeStatusView(TemplateView, LoginRequiredMixin):
         application = Application.objects.get(id=pk)
         form = self.form_class(request.POST, request.FILES, instance=application)
 
-        if form.is_valid():  # проверяем форму регистрации
+        if form.is_valid():  
             instance = form.save(commit=False)
             instance.status = 'В'
             instance.save()
@@ -149,7 +148,7 @@ class ApplicationWorkChangeStatusView(TemplateView, LoginRequiredMixin):
         application = Application.objects.get(id=pk)
         form = self.form_class(request.POST, instance=application)
 
-        if form.is_valid():  # проверяем форму регистрации
+        if form.is_valid():  
             instance = form.save(commit=False)
             instance.status = 'П'
             instance.save()
@@ -172,7 +171,7 @@ class CategoryCreateView(TemplateView, LoginRequiredMixin):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
 
-        if form.is_valid():  # проверяем форму регистрации
+        if form.is_valid():  
             form.save()
             return redirect('categories_list')
 

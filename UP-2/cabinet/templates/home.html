@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Домашняя страница</h3>
+<h4>Здравствуйте!</h4>
+<p>Список 4-х последних выполненых заявок:</p>
+<ul>
+    {% for application in applications %}
+        <li>Временная метка:{{ application.created }}</li>
+        <li>Название:{{ application.title }}</li>
+        <li>Категория заявки:{{ application.category }}</li>
+        <li>Фотография: <img src="{{ application.image.url }}" alt="application photo" style="height:100px; width:100px"></li>
+    {% endfor %}
+</ul>
+<p>Количество заявок находящихся в работе: {{ applications_count }}</p>
+{% endblock %}

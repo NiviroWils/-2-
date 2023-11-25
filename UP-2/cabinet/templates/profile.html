@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Профиль пользователя</h3>
+<h4>Здравствуйте, {{ request.user.first_name }}!</h4>
+
+<form action="{% url 'profile-filter' %}" method="get" name="filter">
+  <h3>Статус заявки:</h3>
+    <div>
+        <select name="status">
+            <option value="Н">Новая</option>
+            <option value="П">Принято в работу</option>
+            <option value="В">Выполнено</option>
+        </select>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Найти</button>
+</form>
+<br>
+<a href="{% url 'profile' %}" class="btn btn-primary">Показать все</a>
+<br>
+<p>Ваши заявки:</p>
+<ul>
+    {% for application in application_list %}
+      <li>Временная метка: {{ application.created }}</li>
+      <li>Название заявки: {{ application.title }}</li>
+      <li>Описание заявки: {{ application.description }}</li>
+      <li>Категория заявки: {{ application.category }}</li>
+      <li>Статус заявки: {{ application.get_status_display }}</li>
+        {% if application.status == 'Н' %}
+            <a href="{% url 'application_delete' pk=application.id %}" class="btn btn-primary">Удалить заявку</a>
+        {% elif application.status == 'П' %}
+		    <span class="invalid-feedback"><i><strong>*</strong>Вы не можете удалить данную заявку, так как она принята в работу.</i></span>
+        {% elif application.status == 'В' %}
+		    <span class="invalid-feedback"><i><strong>*</strong>Вы не можете удалить данную заявку, так как она выполнена.</i></span>
+        {% endif %}
+      <p>-----------------------------------------</p>
+    {% endfor %}
+</ul>
+{% endblock %}

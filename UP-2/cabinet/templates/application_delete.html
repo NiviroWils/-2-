@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Вы уверены, что хотите удалить заявку?</h3>
+<a href="{% url 'application_delete_confirm' pk=application.id %}" class="btn btn-primary">Подтвердить</a>
+{% endblock %}

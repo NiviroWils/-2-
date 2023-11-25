@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Страница для работы со статусами заявок</h3>
+
+<p>Все заявки со статусом "Новая":</p>
+<ul>
+    {% for application in applications %}
+      <li>Название заявки: {{ application.title }}</li>
+        <a href="{% url 'application_work_change_status' pk=application.id %}" class="btn btn-primary">Изменить статус заявки на "Принято в работу"</a>
+        <a href="{% url 'application_done_change_status' pk=application.id %}" class="btn btn-primary">Изменить статус заявки на "Выполнено"</a>
+      <p>-----------------------------------------</p>
+    {% endfor %}
+</ul>
+{% endblock %}

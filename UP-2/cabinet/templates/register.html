@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<h3>Регистрация</h3>
+		<form method="POST" class = "sign-up-form">
+			{% csrf_token %}
+
+		<div class="form-group">
+		  <label for="{{ form.first_name.id_for_label }}">
+		    Фамилия Имя Отчество
+		  </label>
+		  <input type="text" id="{{ form.first_name.id_for_label }}"
+		         name="{{ form.first_name.html_name }}"
+		         {% if form.first_name.field.required %}required{% endif %}
+		         class="form-control{% if form.first_name.errors %} is-invalid{% endif %}"
+		         value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}">
+		  {% if form.first_name.help_text %}
+		    <small class="text-muted">
+		      {{ form.first_name.help_text }}
+		    </small>
+		  {% endif %}
+		  {% for err in form.first_name.errors %}
+		    <span class="invalid-feedback">{{ err }}</span>
+		  {% endfor %}
+		</div>
+
+		<div class="form-group">
+		  <label for="{{ form.username.id_for_label }}">
+		    Логин
+		  </label>
+		  <input type="text" id="{{ form.username.id_for_label }}"
+		         name="{{ form.username.html_name }}"
+		         {% if form.username.field.required %}required{% endif %}
+		         class="form-control{% if form.username.errors %} is-invalid{% endif %}"
+		         value="{% if form.username.value %}{{ form.username.value }}{% endif %}">
+		  {% if form.username.help_text %}
+		    <small class="text-muted">
+		      {{ form.username.help_text }}
+		    </small>
+		  {% endif %}
+		  {% for err in form.username.errors %}
+		    <span class="invalid-feedback">{{ err }}</span>
+		  {% endfor %}
+		</div>
+
+
+		<div class="form-group">
+		  <label for="{{ form.email.id_for_label }}">
+		    Email
+		  </label>
+		  <input type="email" id="{{ form.email.id_for_label }}"
+		         name="{{ form.email.html_name }}"
+		         {% if form.email.field.required %}required{% endif %}
+		         class="form-control{% if form.email.errors %} is-invalid{% endif %}"
+		         value="{% if form.email.value %}{{ form.email.value }}{% endif %}">
+		  {% if form.email.help_text %}
+		    <small class="text-muted">
+		      {{ form.email.help_text }}
+		    </small>
+		  {% endif %}
+		  {% for err in form.email.errors %}
+		    <span class="invalid-feedback">{{ err }}</span>
+		  {% endfor %}
+		</div>
+
+
+		<div class="form-group">
+		  <label for="{{ form.password.id_for_label }}">
+		    Пароль
+		  </label>
+		  <input type="password" id="{{ form.password.id_for_label }}"
+		         name="{{ form.password.html_name }}"
+		         {% if form.password.field.required %}required{% endif %}
+		         class="form-control{% if form.password.errors %} is-invalid{% endif %}"
+		         value="{% if form.password.value %}{{ form.password.value }}{% endif %}">
+		  {% if form.password.help_text %}
+		    <small class="text-muted">
+		      {{ form.password.help_text }}
+		    </small>
+		  {% endif %}
+		  {% for err in form.password.errors %}
+		    <span class="invalid-feedback">{{ err }}</span>
+		  {% endfor %}
+		</div>
+
+		<div class="form-group">
+		  <label for="{{ form.password2.id_for_label }}">
+		    Повтор пароля
+		  </label>
+		  <input type="password" id="{{ form.password2.id_for_label }}"
+		         name="{{ form.password2.html_name }}"
+		         {% if form.password2.field.required %}required{% endif %}
+		         class="form-control{% if form.password2.errors %} is-invalid{% endif %}"
+		         value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}">
+		  {% if form.password2.help_text %}
+		    <small class="text-muted">
+		      {{ form.password2.help_text }}
+		    </small>
+		  {% endif %}
+		  {% for err in form.password2.errors %}
+		    <span class="invalid-feedback">{{ err }}</span>
+		  {% endfor %}
+		</div>
+
+		<div class="form-group">
+		  <label for="confirm" >
+		  	<input type="checkbox" id="confirm" value="1" name="confirm"/>
+		    Согласие на обработку персональных данных
+		  </label>
+		  
+		  {% if form.confirm.help_text %}
+		    <small class="text-muted">
+		      {{ form.confirm.help_text }}
+		    </small>
+		  {% endif %}
+		  {% for err in form.confirm.errors %}
+		    <span class="invalid-feedback">{{ err }}</span>
+		  {% endfor %}
+		</div>
+
+		<input type="submit" class="btn btn-primary" value="Зарегистрироваться" />
+		</form>
+</div>
+</div>
+{% endblock %}

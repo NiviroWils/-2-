@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Страница для работы с категориями</h3>
+
+<a href="{% url 'create_category' %}" class="btn btn-primary">Создать категорию</a>
+
+<p>Все категории:</p>
+<ul>
+    {% for category in categories %}
+      <li>Название категории: {{ category.title }}</li>
+        <a href="{% url 'category_delete' pk=category.id %}" class="btn btn-primary">Удалить категорию</a>
+      <p>-----------------------------------------</p>
+    {% endfor %}
+</ul>
+{% endblock %}

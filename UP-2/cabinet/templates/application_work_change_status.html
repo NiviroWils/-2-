@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Изменение статуса заявки{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<h3>Изменение статуса заявки на "Принято в работу"</h3>
+        <p>Название заявки: {{ application.title }}</p>
+		<form method="POST" class = "sign-up-form">
+			{% csrf_token %}
+            <div>
+        {% for field in form %}
+        <div class="form-group">
+            {{field.label_tag}}
+            <div>{{field}}</div>
+            {% if field.errors%}
+            {% for err in field.errors %}
+                <span class="invalid-feedback">{{ err }}</span>{{error}}
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+        </div>
+
+		<input type="submit" class="btn btn-primary" value="Изменить статус заявки" />
+		</form>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Создание заявки{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<h3>Создание заявки</h3>
+		<form method="POST" class = "sign-up-form" enctype="multipart/form-data">
+			{% csrf_token %}
+            <div>
+        {% for field in form %}
+        <div class="form-group">
+            {{field.label_tag}}
+            <div>{{field}}</div>
+            {% if field.errors%}
+            {% for err in field.errors %}
+                <span class="invalid-feedback">{{ err }}</span>{{error}}
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+        </div>
+
+		<input type="submit" class="btn btn-primary" value="Создать заявку" />
+		</form>
+</div>
+</div>
+{% endblock %}
